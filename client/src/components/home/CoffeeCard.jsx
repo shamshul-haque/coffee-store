@@ -2,9 +2,41 @@ import PropTypes from "prop-types";
 import { AiFillEye } from "react-icons/ai";
 import { BsFillPencilFill } from "react-icons/bs";
 import { MdDelete } from "react-icons/md";
+import Swal from "sweetalert2";
 
 const CoffeeCard = ({ coffee }) => {
-  const { name, chef, photo, price } = coffee;
+  const { _id, name, chef, photo, price } = coffee;
+
+  const handleDelete = (id) => {
+    console.log(id);
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        const deleteItem = async () => {
+          const res = await fetch(`http://localhost:5000/coffee/${id}`, {
+            method: "DELETE",
+          });
+          const data = await res.json();
+          console.log(data);
+          if (data.deletedCount > 0) {
+            Swal.fire(
+              "Deleted!",
+              "Your coffee item has been deleted.",
+              "success"
+            );
+          }
+        };
+        deleteItem();
+      }
+    });
+  };
 
   return (
     <div className="flex items-center justify-evenly bg-[#F4F3F0] p-5 rounded">
@@ -29,7 +61,10 @@ const CoffeeCard = ({ coffee }) => {
         <button className="text-sm md:text-xl text-white bg-[#3C393B] p-1 rounded">
           <BsFillPencilFill />
         </button>
-        <button className="text-sm md:text-xl text-white bg-[#EA4744] p-1 rounded">
+        <button
+          onClick={() => handleDelete(_id)}
+          className="text-sm md:text-xl text-white bg-[#EA4744] p-1 rounded"
+        >
           <MdDelete />
         </button>
       </div>
