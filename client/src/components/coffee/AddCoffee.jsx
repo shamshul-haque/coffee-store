@@ -30,6 +30,7 @@ const AddCoffee = () => {
 
     console.log(newCoffee);
   };
+
   return (
     <div
       style={{

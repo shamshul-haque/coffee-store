@@ -3,6 +3,34 @@ import { Link } from "react-router-dom";
 import form_bg from "../../assets/images/form_bg.png";
 
 const UpdateCoffee = () => {
+  const handleUpdateCoffee = (e) => {
+    e.preventDefault();
+
+    const form = e.target;
+
+    const name = form.name.value;
+    const quantity = form.quantity.value;
+    const supplier = form.supplier.value;
+    const taste = form.taste.value;
+    const category = form.category.value;
+    const details = form.details.value;
+    const photo = form.photo.value;
+
+    const newCoffee = {
+      name,
+      quantity,
+      supplier,
+      taste,
+      category,
+      details,
+      photo,
+    };
+
+    form.reset();
+
+    console.log(newCoffee);
+  };
+
   return (
     <div
       style={{
@@ -31,7 +59,7 @@ const UpdateCoffee = () => {
               Enthusiasts with Fresh Experiences.
             </p>
           </div>
-          <form className="space-y-4">
+          <form onSubmit={handleUpdateCoffee} className="space-y-4">
             <div className="flex flex-col md:flex-row items-center gap-5">
               <div className="flex flex-col font-raleway space-y-2 w-full md:w-1/2">
                 <label className="">Name</label>
