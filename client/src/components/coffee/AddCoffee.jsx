@@ -1,13 +1,14 @@
 import { BiArrowBack } from "react-icons/bi";
 import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
 import form_bg from "../../assets/images/form_bg.png";
 
 const AddCoffee = () => {
   const handleAddCoffee = (e) => {
     e.preventDefault();
 
+    // Get the input data
     const form = e.target;
-
     const name = form.name.value;
     const quantity = form.quantity.value;
     const supplier = form.supplier.value;
@@ -15,7 +16,9 @@ const AddCoffee = () => {
     const category = form.category.value;
     const details = form.details.value;
     const photo = form.photo.value;
+    form.reset();
 
+    // Store the gated data
     const newCoffee = {
       name,
       quantity,
@@ -26,9 +29,26 @@ const AddCoffee = () => {
       photo,
     };
 
-    form.reset();
-
-    console.log(newCoffee);
+    // Send data to the server
+    const getData = async () => {
+      const res = await fetch("http://localhost:5000/coffee", {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(newCoffee),
+      });
+      const data = await res.json();
+      if (data.insertedId) {
+        Swal.fire({
+          title: "Success!",
+          text: "Item Added Successfully",
+          icon: "success",
+          confirmButtonText: "Ok",
+        });
+      }
+    };
+    getData();
   };
 
   return (
