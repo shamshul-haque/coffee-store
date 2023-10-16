@@ -29,13 +29,17 @@ async function run() {
     // Connect to the "coffeeDB" database and access its "coffee" collection
     const coffeeCollection = client.db("coffeeDB").collection("coffee");
 
-    // Insert single item
+    // Insert single item into database
     app.post("/coffee", async (req, res) => {
-      // Received data from the client
       const newCoffee = req.body;
-
-      // Insert the defined data into the coffeeCollection
       const result = await coffeeCollection.insertOne(newCoffee);
+      res.send(result);
+    });
+
+    // Find all items from database
+    app.get("/coffee", async (req, res) => {
+      const cursor = coffeeCollection.find();
+      const result = await cursor.toArray();
       res.send(result);
     });
 

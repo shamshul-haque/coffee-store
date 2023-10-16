@@ -10,23 +10,25 @@ const AddCoffee = () => {
     // Get the input data
     const form = e.target;
     const name = form.name.value;
-    const quantity = form.quantity.value;
+    const chef = form.chef.value;
     const supplier = form.supplier.value;
     const taste = form.taste.value;
     const category = form.category.value;
     const details = form.details.value;
     const photo = form.photo.value;
+    const price = form.price.value;
     form.reset();
 
     // Store the gated data
     const newCoffee = {
       name,
-      quantity,
+      chef,
       supplier,
       taste,
       category,
       details,
       photo,
+      price,
     };
 
     // Send data to the server
@@ -89,11 +91,11 @@ const AddCoffee = () => {
                 />
               </div>
               <div className="flex flex-col font-raleway space-y-2 w-full md:w-1/2">
-                <label>Quantity</label>
+                <label>Chef</label>
                 <input
-                  type="number"
-                  name="quantity"
-                  placeholder="Enter coffee quantity"
+                  type="text"
+                  name="chef"
+                  placeholder="Enter coffee chef"
                   className="p-2 rounded outline-0 text-sm"
                 />
               </div>
@@ -138,14 +140,25 @@ const AddCoffee = () => {
                 />
               </div>
             </div>
-            <div className="flex flex-col font-raleway space-y-2 w-full">
-              <label className="">Photo</label>
-              <input
-                type="url"
-                name="photo"
-                placeholder="Enter photo url"
-                className="p-2 rounded outline-0 text-sm"
-              />
+            <div className="flex flex-col md:flex-row items-center gap-5">
+              <div className="flex flex-col font-raleway space-y-2 w-full md:w-1/2">
+                <label className="">Photo</label>
+                <input
+                  type="url"
+                  name="photo"
+                  placeholder="Enter photo url"
+                  className="p-2 rounded outline-0 text-sm"
+                />
+              </div>
+              <div className="flex flex-col font-raleway space-y-2 w-full md:w-1/2">
+                <label>Price</label>
+                <input
+                  type="number"
+                  name="price"
+                  placeholder="Enter coffee price"
+                  className="p-2 rounded outline-0 text-sm"
+                />
+              </div>
             </div>
             <input
               type="submit"

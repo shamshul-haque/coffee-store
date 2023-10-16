@@ -9,7 +9,7 @@ const UpdateCoffee = () => {
     const form = e.target;
 
     const name = form.name.value;
-    const quantity = form.quantity.value;
+    const chef = form.chef.value;
     const supplier = form.supplier.value;
     const taste = form.taste.value;
     const category = form.category.value;
@@ -18,7 +18,7 @@ const UpdateCoffee = () => {
 
     const newCoffee = {
       name,
-      quantity,
+      chef,
       supplier,
       taste,
       category,
@@ -120,14 +120,25 @@ const UpdateCoffee = () => {
                 />
               </div>
             </div>
-            <div className="flex flex-col font-raleway space-y-2 w-full">
-              <label className="">Photo</label>
-              <input
-                type="url"
-                name="photo"
-                placeholder="Enter photo url"
-                className="p-2 rounded outline-0 text-sm"
-              />
+            <div className="flex flex-col md:flex-row items-center gap-5">
+              <div className="flex flex-col font-raleway space-y-2 w-full md:w-1/2">
+                <label className="">Photo</label>
+                <input
+                  type="url"
+                  name="photo"
+                  placeholder="Enter photo url"
+                  className="p-2 rounded outline-0 text-sm"
+                />
+              </div>
+              <div className="flex flex-col font-raleway space-y-2 w-full md:w-1/2">
+                <label>Price</label>
+                <input
+                  type="number"
+                  name="price"
+                  placeholder="Enter coffee price"
+                  className="p-2 rounded outline-0 text-sm"
+                />
+              </div>
             </div>
             <input
               type="submit"
