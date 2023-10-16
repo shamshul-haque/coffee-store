@@ -3,6 +3,33 @@ import { Link } from "react-router-dom";
 import form_bg from "../../assets/images/form_bg.png";
 
 const AddCoffee = () => {
+  const handleAddCoffee = (e) => {
+    e.preventDefault();
+
+    const form = e.target;
+
+    const name = form.name.value;
+    const quantity = form.quantity.value;
+    const supplier = form.supplier.value;
+    const taste = form.taste.value;
+    const category = form.category.value;
+    const details = form.details.value;
+    const photo = form.photo.value;
+
+    const newCoffee = {
+      name,
+      quantity,
+      supplier,
+      taste,
+      category,
+      details,
+      photo,
+    };
+
+    form.reset();
+
+    console.log(newCoffee);
+  };
   return (
     <div
       style={{
@@ -29,7 +56,7 @@ const AddCoffee = () => {
               Collection. Share the Aroma!
             </p>
           </div>
-          <form className="space-y-4">
+          <form onSubmit={handleAddCoffee} className="space-y-4">
             <div className="flex flex-col md:flex-row items-center gap-5">
               <div className="flex flex-col font-raleway space-y-2 w-full md:w-1/2">
                 <label className="">Name</label>
@@ -41,11 +68,11 @@ const AddCoffee = () => {
                 />
               </div>
               <div className="flex flex-col font-raleway space-y-2 w-full md:w-1/2">
-                <label>Chef</label>
+                <label>Quantity</label>
                 <input
-                  type="text"
-                  name="chef"
-                  placeholder="Enter coffee chef"
+                  type="number"
+                  name="quantity"
+                  placeholder="Enter coffee quantity"
                   className="p-2 rounded outline-0 text-sm"
                 />
               </div>

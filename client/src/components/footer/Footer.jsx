@@ -31,7 +31,7 @@ const Footer = () => {
               Espresso Emporium
             </h1>
           </div>
-          <p className="mt-1">
+          <p className="mt-1 font-raleway">
             Awaken Your Senses at Espresso Emporium, Where Every Sip of Our
             Exceptional Coffee is a Moment of Bliss.
           </p>
@@ -52,7 +52,7 @@ const Footer = () => {
           <h2 className="text-3xl text-[#331A15] font-rancho mt-5">
             Get in Touch
           </h2>
-          <div className="mt-2 space-y-1">
+          <div className="mt-2 space-y-1 font-raleway">
             <p className="flex items-center gap-2 text-[#331A15]">
               <BsFillTelephoneFill />
               <span>+880 1406680846</span>
@@ -71,25 +71,25 @@ const Footer = () => {
           <h2 className="text-3xl text-[#331A15] font-rancho">
             Connect with Us
           </h2>
-          <form className="space-y-4 mt-5">
+          <form className="space-y-4 mt-5 font-raleway">
             <input
               type="text"
               name="name"
               placeholder="Name"
-              className="w-full p-2 rounded-md outline-0"
+              className="w-full p-2 rounded outline-0 text-sm"
             />
             <input
               type="email"
               name="email"
               placeholder="Email"
-              className="w-full p-2 rounded-md outline-0"
+              className="w-full p-2 rounded outline-0 text-sm"
             />
             <textarea
               name="message"
               cols="10"
               rows="2"
               placeholder="Message"
-              className="w-full p-2 rounded-md outline-0"
+              className="w-full p-2 rounded outline-0 text-sm"
             />
             <input
               type="submit"
