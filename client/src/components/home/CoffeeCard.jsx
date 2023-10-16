@@ -2,13 +2,13 @@ import PropTypes from "prop-types";
 import { AiFillEye } from "react-icons/ai";
 import { BsFillPencilFill } from "react-icons/bs";
 import { MdDelete } from "react-icons/md";
+import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 
-const CoffeeCard = ({ coffee }) => {
+const CoffeeCard = ({ coffee, coffees, setCoffees }) => {
   const { _id, name, chef, photo, price } = coffee;
 
   const handleDelete = (id) => {
-    console.log(id);
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -24,13 +24,14 @@ const CoffeeCard = ({ coffee }) => {
             method: "DELETE",
           });
           const data = await res.json();
-          console.log(data);
           if (data.deletedCount > 0) {
             Swal.fire(
               "Deleted!",
               "Your coffee item has been deleted.",
               "success"
             );
+            const remaining = coffees.filter((coffee) => coffee._id !== id);
+            setCoffees(remaining);
           }
         };
         deleteItem();
@@ -39,7 +40,7 @@ const CoffeeCard = ({ coffee }) => {
   };
 
   return (
-    <div className="flex items-center justify-evenly bg-[#F4F3F0] p-5 rounded">
+    <div className="flex items-center justify-between bg-[#F4F3F0] p-5 rounded">
       <figure>
         <img src={photo} alt={name} className="w-16 lg:w-32 h-32 lg:h-48" />
       </figure>
@@ -58,9 +59,11 @@ const CoffeeCard = ({ coffee }) => {
         <button className="text-sm md:text-xl text-white bg-[#D2B48C] p-1 rounded">
           <AiFillEye />
         </button>
-        <button className="text-sm md:text-xl text-white bg-[#3C393B] p-1 rounded">
-          <BsFillPencilFill />
-        </button>
+        <Link to={`/updateCoffee/${_id}`}>
+          <button className="text-sm md:text-xl text-white bg-[#3C393B] p-1 rounded">
+            <BsFillPencilFill />
+          </button>
+        </Link>
         <button
           onClick={() => handleDelete(_id)}
           className="text-sm md:text-xl text-white bg-[#EA4744] p-1 rounded"
@@ -74,6 +77,8 @@ const CoffeeCard = ({ coffee }) => {
 
 CoffeeCard.propTypes = {
   coffee: PropTypes.object,
+  coffees: PropTypes.array,
+  setCoffees: PropTypes.func,
 };
 
 export default CoffeeCard;

@@ -1,13 +1,17 @@
 import { BiArrowBack } from "react-icons/bi";
-import { Link } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
+import Swal from "sweetalert2";
 import form_bg from "../../assets/images/form_bg.png";
 
 const UpdateCoffee = () => {
+  const coffee = useLoaderData();
+  const { _id, name, chef, supplier, taste, category, details, photo, price } =
+    coffee;
+
   const handleUpdateCoffee = (e) => {
     e.preventDefault();
 
     const form = e.target;
-
     const name = form.name.value;
     const chef = form.chef.value;
     const supplier = form.supplier.value;
@@ -15,8 +19,10 @@ const UpdateCoffee = () => {
     const category = form.category.value;
     const details = form.details.value;
     const photo = form.photo.value;
+    const price = form.price.value;
+    form.reset();
 
-    const newCoffee = {
+    const updatedCoffee = {
       name,
       chef,
       supplier,
@@ -24,11 +30,28 @@ const UpdateCoffee = () => {
       category,
       details,
       photo,
+      price,
     };
 
-    form.reset();
-
-    console.log(newCoffee);
+    const getCoffee = async () => {
+      const res = await fetch(`http://localhost:5000/coffee/${_id}`, {
+        method: "PUT",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(updatedCoffee),
+      });
+      const data = await res.json();
+      if (data.modifiedCount > 0) {
+        Swal.fire({
+          title: "Success!",
+          text: "Coffee Item Updated Successfully",
+          icon: "success",
+          confirmButtonText: "Ok",
+        });
+      }
+    };
+    getCoffee();
   };
 
   return (
@@ -66,6 +89,7 @@ const UpdateCoffee = () => {
                 <input
                   type="text"
                   name="name"
+                  defaultValue={name}
                   placeholder="Enter coffee name"
                   className="p-2 rounded outline-0 text-sm"
                 />
@@ -75,6 +99,7 @@ const UpdateCoffee = () => {
                 <input
                   type="text"
                   name="chef"
+                  defaultValue={chef}
                   placeholder="Enter coffee chef"
                   className="p-2 rounded outline-0 text-sm"
                 />
@@ -86,6 +111,7 @@ const UpdateCoffee = () => {
                 <input
                   type="text"
                   name="supplier"
+                  defaultValue={supplier}
                   placeholder="Enter coffee supplier"
                   className="p-2 rounded outline-0 text-sm"
                 />
@@ -95,6 +121,7 @@ const UpdateCoffee = () => {
                 <input
                   type="text"
                   name="taste"
+                  defaultValue={taste}
                   placeholder="Enter coffee taste"
                   className="p-2 rounded outline-0 text-sm"
                 />
@@ -106,6 +133,7 @@ const UpdateCoffee = () => {
                 <input
                   type="text"
                   name="category"
+                  defaultValue={category}
                   placeholder="Enter coffee category"
                   className="p-2 rounded outline-0 text-sm"
                 />
@@ -115,6 +143,7 @@ const UpdateCoffee = () => {
                 <input
                   type="text"
                   name="details"
+                  defaultValue={details}
                   placeholder="Enter coffee details"
                   className="p-2 rounded outline-0 text-sm"
                 />
@@ -126,6 +155,7 @@ const UpdateCoffee = () => {
                 <input
                   type="url"
                   name="photo"
+                  defaultValue={photo}
                   placeholder="Enter photo url"
                   className="p-2 rounded outline-0 text-sm"
                 />
@@ -135,6 +165,7 @@ const UpdateCoffee = () => {
                 <input
                   type="number"
                   name="price"
+                  defaultValue={price}
                   placeholder="Enter coffee price"
                   className="p-2 rounded outline-0 text-sm"
                 />

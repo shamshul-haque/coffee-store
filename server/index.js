@@ -43,6 +43,36 @@ async function run() {
       res.send(result);
     });
 
+    // Find sing item from database
+    app.get("/coffee/:id", async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: new ObjectId(id) };
+      const result = await coffeeCollection.findOne(query);
+      res.send(result);
+    });
+
+    // Update existing item from database
+    app.put("/coffee/:id", async (req, res) => {
+      const id = req.params.id;
+      const updatedCoffee = req.body;
+      const filter = { _id: new ObjectId(id) };
+      const options = { upsert: true };
+      const updated = {
+        $set: {
+          name: updatedCoffee.name,
+          chef: updatedCoffee.chef,
+          supplier: updatedCoffee.supplier,
+          taste: updatedCoffee.taste,
+          category: updatedCoffee.category,
+          details: updatedCoffee.details,
+          photo: updatedCoffee.photo,
+          price: updatedCoffee.price,
+        },
+      };
+      const result = await coffeeCollection.updateOne(filter, updated, options);
+      res.send(result);
+    });
+
     // Delete single item from database
     app.delete("/coffee/:id", async (req, res) => {
       const id = req.params.id;

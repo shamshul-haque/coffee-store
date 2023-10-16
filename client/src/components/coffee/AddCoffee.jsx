@@ -7,7 +7,6 @@ const AddCoffee = () => {
   const handleAddCoffee = (e) => {
     e.preventDefault();
 
-    // Get the input data
     const form = e.target;
     const name = form.name.value;
     const chef = form.chef.value;
@@ -19,7 +18,6 @@ const AddCoffee = () => {
     const price = form.price.value;
     form.reset();
 
-    // Store the gated data
     const newCoffee = {
       name,
       chef,
@@ -31,8 +29,7 @@ const AddCoffee = () => {
       price,
     };
 
-    // Send data to the server
-    const getData = async () => {
+    const getCoffees = async () => {
       const res = await fetch("http://localhost:5000/coffee", {
         method: "POST",
         headers: {
@@ -44,13 +41,13 @@ const AddCoffee = () => {
       if (data.insertedId) {
         Swal.fire({
           title: "Success!",
-          text: "Item Added Successfully",
+          text: "COffee Item Added Successfully",
           icon: "success",
           confirmButtonText: "Ok",
         });
       }
     };
-    getData();
+    getCoffees();
   };
 
   return (
