@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { BiArrowBack } from "react-icons/bi";
 import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
 import form_bg from "../../assets/images/form_bg.png";
 import { AuthContext } from "../../providers/AuthProvider";
 import SocialLogin from "./SocialLogin";
@@ -20,6 +21,28 @@ const Register = () => {
     createUser(email, password)
       .then((result) => {
         console.log(result.user);
+        const createdAt = result.user?.metadata?.createdAt;
+        const newUser = { email, createdAt };
+        const getUsers = async () => {
+          const res = await fetch("http://localhost:5000/user", {
+            method: "POST",
+            headers: {
+              "content-type": "application/json",
+            },
+            body: JSON.stringify(newUser),
+          });
+          const data = await res.json();
+          console.log(data);
+          if (data.insertedId) {
+            Swal.fire({
+              title: "Success!",
+              text: "User Added Successfully",
+              icon: "success",
+              confirmButtonText: "Ok",
+            });
+          }
+        };
+        getUsers();
       })
       .catch((error) => {
         console.log(error);

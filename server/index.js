@@ -28,11 +28,20 @@ async function run() {
 
     // Connect to the "coffeeDB" database and access its "coffee" collection
     const coffeeCollection = client.db("coffeeDB").collection("coffee");
+    const userCollection = client.db("coffeeDB").collection("user");
 
-    // Insert single item into database
+    // Insert single coffee item into database
     app.post("/coffee", async (req, res) => {
       const newCoffee = req.body;
       const result = await coffeeCollection.insertOne(newCoffee);
+      res.send(result);
+    });
+
+    // Insert single user into database
+    app.post("/user", async (req, res) => {
+      const newUser = req.body;
+      console.log(newUser);
+      const result = await userCollection.insertOne(newUser);
       res.send(result);
     });
 
