@@ -21,7 +21,7 @@ const CoffeeCard = ({ coffee, coffees, setCoffees }) => {
       if (result.isConfirmed) {
         const deleteItem = async () => {
           const res = await fetch(
-            `https://server-dfc9wiib1-shamshul-haque.vercel.app/coffee/${id}`,
+            `https://server-9t5j3hb2c-shamshul-haque.vercel.app/coffee/${id}`,
             {
               method: "DELETE",
             }

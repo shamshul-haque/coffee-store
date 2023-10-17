@@ -24,7 +24,7 @@ const Login = () => {
         const newUser = { email, lastLogin };
         const getData = async () => {
           const res = await fetch(
-            `https://server-dfc9wiib1-shamshul-haque.vercel.app/user`,
+            `https://server-9t5j3hb2c-shamshul-haque.vercel.app/user`,
             {
               method: "PATCH",
               headers: {

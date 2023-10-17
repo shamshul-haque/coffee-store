@@ -31,7 +31,7 @@ const AddCoffee = () => {
 
     const getCoffees = async () => {
       const res = await fetch(
-        "https://server-dfc9wiib1-shamshul-haque.vercel.app/coffee",
+        "https://server-9t5j3hb2c-shamshul-haque.vercel.app/coffee",
         {
           method: "POST",
           headers: {

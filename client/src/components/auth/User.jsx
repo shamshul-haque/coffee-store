@@ -20,7 +20,7 @@ const User = () => {
       if (result.isConfirmed) {
         const deleteUser = async () => {
           const res = await fetch(
-            `https://server-dfc9wiib1-shamshul-haque.vercel.app/user/${id}`,
+            `https://server-9t5j3hb2c-shamshul-haque.vercel.app/user/${id}`,
             {
               method: "DELETE",
             }
