@@ -1,9 +1,13 @@
+import { useContext } from "react";
 import { BiArrowBack } from "react-icons/bi";
 import { Link } from "react-router-dom";
 import form_bg from "../../assets/images/form_bg.png";
+import { AuthContext } from "../../providers/AuthProvider";
 import SocialLogin from "./SocialLogin";
 
 const Register = () => {
+  const { createUser } = useContext(AuthContext);
+
   const handleRegistration = (e) => {
     e.preventDefault();
     const form = new FormData(e.currentTarget);
@@ -13,6 +17,13 @@ const Register = () => {
     const photo = form.get("photo");
     e.currentTarget.reset();
     console.log(name, email, password, photo);
+    createUser(email, password)
+      .then((result) => {
+        console.log(result.user);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (
