@@ -18,6 +18,7 @@ const Register = () => {
     const photo = form.get("photo");
     e.currentTarget.reset();
     console.log(name, email, password, photo);
+
     createUser(email, password)
       .then((result) => {
         console.log(result.user);

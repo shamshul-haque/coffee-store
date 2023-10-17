@@ -1,6 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import Login from "../components/auth/Login";
 import Register from "../components/auth/Regster";
+import User from "../components/auth/User";
 import AddCoffee from "../components/coffee/AddCoffee";
 import UpdateCoffee from "../components/coffee/UpdateCoffee";
 import Home from "../components/home/Home";
@@ -33,6 +34,11 @@ const router = createBrowserRouter([
       {
         path: "/login",
         element: <Login />,
+      },
+      {
+        path: "/user",
+        element: <User />,
+        loader: () => fetch("http://localhost:5000/user"),
       },
     ],
   },

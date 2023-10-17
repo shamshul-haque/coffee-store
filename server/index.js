@@ -45,9 +45,16 @@ async function run() {
       res.send(result);
     });
 
-    // Find all items from database
+    // Find all coffee items from database
     app.get("/coffee", async (req, res) => {
       const cursor = coffeeCollection.find();
+      const result = await cursor.toArray();
+      res.send(result);
+    });
+
+    // Find all users from database
+    app.get("/user", async (req, res) => {
+      const cursor = userCollection.find();
       const result = await cursor.toArray();
       res.send(result);
     });
@@ -82,11 +89,19 @@ async function run() {
       res.send(result);
     });
 
-    // Delete single item from database
+    // Delete single coffee item from database
     app.delete("/coffee/:id", async (req, res) => {
       const id = req.params.id;
       const query = { _id: new ObjectId(id) };
       const result = await coffeeCollection.deleteOne(query);
+      res.send(result);
+    });
+
+    // Delete single user from database
+    app.delete("/user/:id", async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: new ObjectId(id) };
+      const result = await userCollection.deleteOne(query);
       res.send(result);
     });
 
