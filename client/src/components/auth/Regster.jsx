@@ -22,7 +22,7 @@ const Register = () => {
     createUser(email, password)
       .then((result) => {
         console.log(result.user);
-        const createdAt = result.user?.metadata?.createdAt;
+        const createdAt = result.user?.metadata?.creationTime;
         const newUser = { email, createdAt };
         const getUsers = async () => {
           const res = await fetch("http://localhost:5000/user", {

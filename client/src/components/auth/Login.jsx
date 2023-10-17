@@ -1,12 +1,13 @@
 import { useContext } from "react";
 import { BiArrowBack } from "react-icons/bi";
 import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
 import form_bg from "../../assets/images/form_bg.png";
 import { AuthContext } from "../../providers/AuthProvider";
 import SocialLogin from "./SocialLogin";
 
 const Login = () => {
-  const {} = useContext(AuthContext);
+  const { loginUser } = useContext(AuthContext);
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -15,6 +16,35 @@ const Login = () => {
     const password = form.get("password");
     e.currentTarget.reset();
     console.log(email, password);
+
+    loginUser(email, password)
+      .then((result) => {
+        console.log(result.user);
+        const lastLogin = result.user?.metadata?.lastSignInTime;
+        const newUser = { email, lastLogin };
+        const getData = async () => {
+          const res = await fetch(`http://localhost:5000/user`, {
+            method: "PATCH",
+            headers: {
+              "content-type": "application/json",
+            },
+            body: JSON.stringify(newUser),
+          });
+          const data = await res.json();
+          if (data.modifiedCount > 0) {
+            Swal.fire({
+              title: "Success!",
+              text: "Coffee Item Updated Successfully",
+              icon: "success",
+              confirmButtonText: "Ok",
+            });
+          }
+        };
+        getData();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (

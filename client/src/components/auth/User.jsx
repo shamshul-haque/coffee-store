@@ -40,12 +40,12 @@ const User = () => {
       <p>users:{loadedUsers.length}</p>
       <div className="overflow-x-auto">
         <table className="table">
-          {/* head */}
           <thead>
             <tr>
               <th>SL No</th>
               <th>Email</th>
               <th>Created At</th>
+              <th>Last Login</th>
               <th>Action</th>
             </tr>
           </thead>
@@ -54,6 +54,7 @@ const User = () => {
               <tr key={user._id}>
                 <th>1</th>
                 <td>{user.email}</td>
+                <td>{user.lastLogin}</td>
                 <td>{user.createdAt}</td>
                 <td>
                   <button

@@ -89,6 +89,19 @@ async function run() {
       res.send(result);
     });
 
+    // Update specific field of existing user from database
+    app.patch("/user", async (req, res) => {
+      const updatedUser = req.body;
+      const filter = { email: updatedUser.email };
+      const updated = {
+        $set: {
+          lastLogin: updatedUser.lastLogin,
+        },
+      };
+      const result = await userCollection.updateOne(filter, updated);
+      res.send(result);
+    });
+
     // Delete single coffee item from database
     app.delete("/coffee/:id", async (req, res) => {
       const id = req.params.id;
