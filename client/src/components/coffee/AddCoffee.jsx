@@ -30,13 +30,16 @@ const AddCoffee = () => {
     };
 
     const getCoffees = async () => {
-      const res = await fetch("http://localhost:5000/coffee", {
-        method: "POST",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify(newCoffee),
-      });
+      const res = await fetch(
+        "https://server-dfc9wiib1-shamshul-haque.vercel.app/coffee",
+        {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(newCoffee),
+        }
+      );
       const data = await res.json();
       if (data.insertedId) {
         Swal.fire({

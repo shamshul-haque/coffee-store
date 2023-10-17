@@ -19,9 +19,12 @@ const User = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         const deleteUser = async () => {
-          const res = await fetch(`http://localhost:5000/user/${id}`, {
-            method: "DELETE",
-          });
+          const res = await fetch(
+            `https://server-dfc9wiib1-shamshul-haque.vercel.app/user/${id}`,
+            {
+              method: "DELETE",
+            }
+          );
           const data = await res.json();
           console.log(data);
           if (data.deletedCount > 0) {

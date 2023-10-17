@@ -23,13 +23,16 @@ const Login = () => {
         const lastLogin = result.user?.metadata?.lastSignInTime;
         const newUser = { email, lastLogin };
         const getData = async () => {
-          const res = await fetch(`http://localhost:5000/user`, {
-            method: "PATCH",
-            headers: {
-              "content-type": "application/json",
-            },
-            body: JSON.stringify(newUser),
-          });
+          const res = await fetch(
+            `https://server-dfc9wiib1-shamshul-haque.vercel.app/user`,
+            {
+              method: "PATCH",
+              headers: {
+                "content-type": "application/json",
+              },
+              body: JSON.stringify(newUser),
+            }
+          );
           const data = await res.json();
           if (data.modifiedCount > 0) {
             Swal.fire({

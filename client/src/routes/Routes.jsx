@@ -15,7 +15,8 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home />,
-        loader: () => fetch("http://localhost:5000/coffee"),
+        loader: () =>
+          fetch("https://server-dfc9wiib1-shamshul-haque.vercel.app/coffee"),
       },
       {
         path: "/addCoffee",
@@ -25,7 +26,9 @@ const router = createBrowserRouter([
         path: "/updateCoffee/:id",
         element: <UpdateCoffee />,
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/coffee/${params.id}`),
+          fetch(
+            `https://server-dfc9wiib1-shamshul-haque.vercel.app/coffee/${params.id}`
+          ),
       },
       {
         path: "/register",
@@ -38,7 +41,8 @@ const router = createBrowserRouter([
       {
         path: "/user",
         element: <User />,
-        loader: () => fetch("http://localhost:5000/user"),
+        loader: () =>
+          fetch("https://server-dfc9wiib1-shamshul-haque.vercel.app/user"),
       },
     ],
   },

@@ -25,13 +25,16 @@ const Register = () => {
         const createdAt = result.user?.metadata?.creationTime;
         const newUser = { email, createdAt };
         const getUsers = async () => {
-          const res = await fetch("http://localhost:5000/user", {
-            method: "POST",
-            headers: {
-              "content-type": "application/json",
-            },
-            body: JSON.stringify(newUser),
-          });
+          const res = await fetch(
+            "https://server-dfc9wiib1-shamshul-haque.vercel.app/user",
+            {
+              method: "POST",
+              headers: {
+                "content-type": "application/json",
+              },
+              body: JSON.stringify(newUser),
+            }
+          );
           const data = await res.json();
           console.log(data);
           if (data.insertedId) {
