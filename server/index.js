@@ -130,7 +130,7 @@ async function run() {
 }
 run().catch(console.dir);
 
-app.get("/health", (req, res) => {
+app.get("/", (req, res) => {
   res.send("coffee-store server is running");
 });
 

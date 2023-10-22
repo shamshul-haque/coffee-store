@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useContext } from "react";
 import { BiArrowBack } from "react-icons/bi";
 import { Link } from "react-router-dom";
@@ -25,26 +26,37 @@ const Register = () => {
         const createdAt = result.user?.metadata?.creationTime;
         const newUser = { email, createdAt };
         const getUsers = async () => {
-          const res = await fetch(
-            "https://server-9t5j3hb2c-shamshul-haque.vercel.app/user",
-            {
-              method: "POST",
-              headers: {
-                "content-type": "application/json",
-              },
-              body: JSON.stringify(newUser),
+          // using axios
+          axios.post("http://localhost:5000/user", newUser).then((data) => {
+            if (data.data.insertedId) {
+              Swal.fire({
+                title: "Success!",
+                text: "User Added Successfully",
+                icon: "success",
+                confirmButtonText: "Ok",
+              });
             }
-          );
-          const data = await res.json();
-          console.log(data);
-          if (data.insertedId) {
-            Swal.fire({
-              title: "Success!",
-              text: "User Added Successfully",
-              icon: "success",
-              confirmButtonText: "Ok",
-            });
-          }
+          });
+
+          // using fetch
+          // const res = await fetch("http://localhost:5000/user", {
+          //   method: "POST",
+          //   headers: {
+          //     "content-type": "application/json",
+          //   },
+          //   body: JSON.stringify(newUser),
+          // });
+          // const data = await res.json();
+          // console.log(data);
+
+          // if (data.insertedId) {
+          //   Swal.fire({
+          //     title: "Success!",
+          //     text: "User Added Successfully",
+          //     icon: "success",
+          //     confirmButtonText: "Ok",
+          //   });
+          // }
         };
         getUsers();
       })

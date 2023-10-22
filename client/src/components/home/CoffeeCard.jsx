@@ -20,12 +20,9 @@ const CoffeeCard = ({ coffee, coffees, setCoffees }) => {
     }).then((result) => {
       if (result.isConfirmed) {
         const deleteItem = async () => {
-          const res = await fetch(
-            `https://server-9t5j3hb2c-shamshul-haque.vercel.app/coffee/${id}`,
-            {
-              method: "DELETE",
-            }
-          );
+          const res = await fetch(`http://localhost:5000/coffee/${id}`, {
+            method: "DELETE",
+          });
           const data = await res.json();
           if (data.deletedCount > 0) {
             Swal.fire(

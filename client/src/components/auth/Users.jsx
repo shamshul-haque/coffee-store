@@ -1,11 +1,29 @@
-import { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 import { MdDelete } from "react-icons/md";
-import { useLoaderData } from "react-router-dom";
 import Swal from "sweetalert2";
 
-const User = () => {
-  const loadedUsers = useLoaderData();
-  const [users, setUsers] = useState(loadedUsers);
+const Users = () => {
+  // tanstack query
+  const {
+    isPending,
+    isError,
+    error,
+    data: users,
+  } = useQuery({
+    queryKey: ["users"],
+    queryFn: async () => {
+      const res = await fetch("http://localhost:5000/user");
+      return res.json();
+    },
+  });
+
+  if (isPending) {
+    return <span className="loading loading-ring loading-lg"></span>;
+  }
+
+  if (isError) {
+    return <p className="text-red-400">{error.message}</p>;
+  }
 
   const handleDelete = (id) => {
     Swal.fire({
@@ -26,8 +44,8 @@ const User = () => {
           console.log(data);
           if (data.deletedCount > 0) {
             Swal.fire("Deleted!", "User has been deleted.", "success");
-            const remaining = users.filter((user) => user._id !== id);
-            setUsers(remaining);
+            // const remaining = users.filter((user) => user._id !== id);
+            // setUsers(remaining);
           }
         };
         deleteUser();
@@ -37,7 +55,7 @@ const User = () => {
 
   return (
     <div>
-      <p>users:{loadedUsers.length}</p>
+      {/* <p>users:{loadedUsers.length}</p> */}
       <div className="overflow-x-auto">
         <table className="table">
           <thead>
@@ -73,4 +91,4 @@ const User = () => {
   );
 };
 
-export default User;
+export default Users;

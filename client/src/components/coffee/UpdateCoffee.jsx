@@ -34,16 +34,13 @@ const UpdateCoffee = () => {
     };
 
     const getCoffee = async () => {
-      const res = await fetch(
-        `https://server-9t5j3hb2c-shamshul-haque.vercel.app/coffee/${_id}`,
-        {
-          method: "PUT",
-          headers: {
-            "content-type": "application/json",
-          },
-          body: JSON.stringify(updatedCoffee),
-        }
-      );
+      const res = await fetch(`http://localhost:5000/coffee/${_id}`, {
+        method: "PUT",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(updatedCoffee),
+      });
       const data = await res.json();
       if (data.modifiedCount > 0) {
         Swal.fire({

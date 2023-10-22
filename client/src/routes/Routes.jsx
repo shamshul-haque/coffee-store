@@ -2,6 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 import Login from "../components/auth/Login";
 import Register from "../components/auth/Regster";
 import User from "../components/auth/User";
+import Users from "../components/auth/Users";
 import AddCoffee from "../components/coffee/AddCoffee";
 import UpdateCoffee from "../components/coffee/UpdateCoffee";
 import Home from "../components/home/Home";
@@ -15,8 +16,7 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home />,
-        loader: () =>
-          fetch("https://server-9t5j3hb2c-shamshul-haque.vercel.app/coffee"),
+        loader: () => fetch("http://localhost:5000/coffee"),
       },
       {
         path: "/addCoffee",
@@ -26,9 +26,7 @@ const router = createBrowserRouter([
         path: "/updateCoffee/:id",
         element: <UpdateCoffee />,
         loader: ({ params }) =>
-          fetch(
-            `https://server-9t5j3hb2c-shamshul-haque.vercel.app/coffee/${params.id}`
-          ),
+          fetch(`http://localhost:5000/coffee/${params.id}`),
       },
       {
         path: "/register",
@@ -41,8 +39,11 @@ const router = createBrowserRouter([
       {
         path: "/user",
         element: <User />,
-        loader: () =>
-          fetch("https://server-9t5j3hb2c-shamshul-haque.vercel.app/user"),
+        loader: () => fetch("http://localhost:5000/user"),
+      },
+      {
+        path: "/users",
+        element: <Users />,
       },
     ],
   },
