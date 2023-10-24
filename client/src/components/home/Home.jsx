@@ -15,7 +15,7 @@ const Home = () => {
         backgroundRepeat: "no-repeat",
         backgroundSize: "cover",
       }}
-      className="px-5 md:px-10 lg:px-20 py-20"
+      className="px-5 md:px-10 lg:px-20 py-20 bg-blue-400 dark:bg-red-400"
     >
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
         {coffees.map((coffee) => (
