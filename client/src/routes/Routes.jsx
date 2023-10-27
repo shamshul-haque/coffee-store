@@ -4,6 +4,7 @@ import Register from "../components/auth/Regster";
 import User from "../components/auth/User";
 import Users from "../components/auth/Users";
 import AddCoffee from "../components/coffee/AddCoffee";
+import CoffeeDetails from "../components/coffee/CoffeeDetails";
 import UpdateCoffee from "../components/coffee/UpdateCoffee";
 import Home from "../components/home/Home";
 import Root from "../layouts/Root";
@@ -25,6 +26,12 @@ const router = createBrowserRouter([
       {
         path: "/updateCoffee/:id",
         element: <UpdateCoffee />,
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/coffee/${params.id}`),
+      },
+      {
+        path: "/coffeeDetails/:id",
+        element: <CoffeeDetails />,
         loader: ({ params }) =>
           fetch(`http://localhost:5000/coffee/${params.id}`),
       },

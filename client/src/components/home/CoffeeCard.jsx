@@ -56,9 +56,11 @@ const CoffeeCard = ({ coffee, coffees, setCoffees }) => {
         </p>
       </div>
       <div className="flex flex-col items-center justify-center gap-3">
-        <button className="text-sm md:text-xl text-white bg-[#D2B48C] p-1 rounded">
-          <AiFillEye />
-        </button>
+        <Link to={`/coffeeDetails/${_id}`}>
+          <button className="text-sm md:text-xl text-white bg-[#D2B48C] p-1 rounded">
+            <AiFillEye />
+          </button>
+        </Link>
         <Link to={`/updateCoffee/${_id}`}>
           <button className="text-sm md:text-xl text-white bg-[#3C393B] p-1 rounded">
             <BsFillPencilFill />
