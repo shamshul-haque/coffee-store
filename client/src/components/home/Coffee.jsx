@@ -15,7 +15,7 @@ const Coffee = () => {
         backgroundRepeat: "no-repeat",
         backgroundSize: "cover",
       }}
-      className="px-5 md:px-10 lg:px-20 mt-10"
+      className="px-5 md:px-10 lg:px-20 my-10"
     >
       <div className="text-[#331A15] text-center font-rancho">
         <p className="text-lg">--- Sip & Savor ---</p>
