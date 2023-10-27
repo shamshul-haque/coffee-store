@@ -28,7 +28,6 @@ async function run() {
 
     // Connect to the "coffeeDB" database and access its "coffee" collection
     const coffeeCollection = client.db("coffeeDB").collection("coffee");
-    const userCollection = client.db("coffeeDB").collection("user");
 
     // Insert single coffee item into database
     app.post("/coffee", async (req, res) => {
@@ -37,24 +36,9 @@ async function run() {
       res.send(result);
     });
 
-    // Insert single user into database
-    app.post("/user", async (req, res) => {
-      const newUser = req.body;
-      console.log(newUser);
-      const result = await userCollection.insertOne(newUser);
-      res.send(result);
-    });
-
     // Find all coffee items from database
     app.get("/coffee", async (req, res) => {
       const cursor = coffeeCollection.find();
-      const result = await cursor.toArray();
-      res.send(result);
-    });
-
-    // Find all users from database
-    app.get("/user", async (req, res) => {
-      const cursor = userCollection.find();
       const result = await cursor.toArray();
       res.send(result);
     });
@@ -89,32 +73,11 @@ async function run() {
       res.send(result);
     });
 
-    // Update specific field of existing user from database
-    app.patch("/user", async (req, res) => {
-      const updatedUser = req.body;
-      const filter = { email: updatedUser.email };
-      const updated = {
-        $set: {
-          lastLogin: updatedUser.lastLogin,
-        },
-      };
-      const result = await userCollection.updateOne(filter, updated);
-      res.send(result);
-    });
-
     // Delete single coffee item from database
     app.delete("/coffee/:id", async (req, res) => {
       const id = req.params.id;
       const query = { _id: new ObjectId(id) };
       const result = await coffeeCollection.deleteOne(query);
-      res.send(result);
-    });
-
-    // Delete single user from database
-    app.delete("/user/:id", async (req, res) => {
-      const id = req.params.id;
-      const query = { _id: new ObjectId(id) };
-      const result = await userCollection.deleteOne(query);
       res.send(result);
     });
 
