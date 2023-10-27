@@ -30,7 +30,7 @@ const AddCoffee = () => {
     };
 
     const getCoffees = async () => {
-      const res = await fetch("http://localhost:5000/coffee", {
+      const res = await fetch("https://server-eta-smoky.vercel.app/coffee", {
         method: "POST",
         headers: {
           "content-type": "application/json",

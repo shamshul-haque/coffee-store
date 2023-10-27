@@ -15,7 +15,7 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home />,
-        loader: () => fetch("http://localhost:5000/coffee"),
+        loader: () => fetch("https://server-eta-smoky.vercel.app/coffee"),
       },
       {
         path: "/addCoffee",
@@ -25,13 +25,13 @@ const router = createBrowserRouter([
         path: "/updateCoffee/:id",
         element: <UpdateCoffee />,
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/coffee/${params.id}`),
+          fetch(`https://server-eta-smoky.vercel.app/coffee/${params.id}`),
       },
       {
         path: "/coffeeDetails/:id",
         element: <CoffeeDetails />,
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/coffee/${params.id}`),
+          fetch(`https://server-eta-smoky.vercel.app/coffee/${params.id}`),
       },
     ],
   },

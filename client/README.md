@@ -1,1 +1,1 @@
-https://coffee-store-584bd.web.app 
+Click here to embark on a journey of innovation and connectivity: [Coffee-Store](https://coffee-store-584bd.web.app)
